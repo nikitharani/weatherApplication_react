@@ -1,64 +1,70 @@
-import React,{useEffect, useState} from 'react';
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
+import Data from "./Data";
 
+function WeatherApi({ Name }) {
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState([]);
 
+  const weatherData = async () => {
+    try {
+      const data = await Axios.get(
+        `https://weatherdbi.herokuapp.com/data/weather/${city}`
+      );
+      // console.log(data);
+      setWeather(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(weather);
 
+  useEffect(() => {
+    // const weatherData = async () => {
+    //   try {
+    //     const data = await Axios.get(
+    //       `https://weatherdbi.herokuapp.com/data/weather/${city}`
+    //     );
+    //     // console.log(data);
+    //     setWeather(data.data);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
 
+    weatherData();
+  }, [city]);
 
-function WeatherApi({Name}) {
-  const [city, setCity] = useState();
-  const [weather, setWeather] = useState();
-
-
-  const weatherData = async() => {
-    try{
-      const data =await Axios.get(
-        'https://weatherdbi.herokuapp.com/data/weather/London');
-      console.log(data);
-      // setMeanings(data.data);
-          }
-          catch(error){
-            console.log(error);
-          }
-
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setCity("");
+    console.log("button");
   };
 
-  useEffect(()=>{
-    weatherData();
-  },[])
-
-
   return (
-    <div className="weather">
-         <h1>Welcome to the weather app {Name}</h1>
-         <div>
-         <h5>Enter City Name</h5>
+    <div id="search-page">
+      <form onSubmit={submitHandler}>
+        <div className="form-inner">
+          <h2>City</h2>
 
-         {/* <form>
-         <div className='form-group'>
-            <label htmlFor="city">City</label>
-            <input type="text" name ="city" id="city" value={e.target.value} onChange={e=>setCity({...city, city:e.target.value})}/>
+          <div className="form-group">
+            <label htmlFor="name">City</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
           </div>
-          <input type="submit" value="LOGIN"/>
-          </form> */}
-         </div>
 
-
-      </div>
-
+          <input type="submit" value="Enter" />
+        </div>
+      </form>
+      <Data WeatherInfo={weather} />
+    </div>
   );
 }
-
-  // return (
-
-  //     <div className="weather">
-  //       <h1>Welcome to the weather app {Name}</h1>
-
-  //     </div>
-
-  // )
-// }
 
 export default WeatherApi;
