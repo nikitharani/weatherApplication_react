@@ -5,46 +5,25 @@ import Data from "./Data";
 
 function WeatherApi({ Name }) {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState([]);
+  const [weather, updateWeather] = useState([]);
 
-  const weatherData = async () => {
-    try {
-      const data = await Axios.get(
-        `https://weatherdbi.herokuapp.com/data/weather/${city}`
-      );
-      // console.log(data);
-      setWeather(data.data);
-    } catch (error) {
-      console.log(error);
-    }
+  // const [carddisplay, setCarddisplay] = useState(false);
+
+  const fetchWeather = async (e) => {
+    e.preventDefault();
+    const response = await Axios.get(
+      `https://weatherdbi.herokuapp.com/data/weather/${city}`
+    );
+    updateWeather(response.data);
+
+    // setCarddisplay((prevCheck) => !prevCheck);
   };
   console.log(weather);
 
-  useEffect(() => {
-    // const weatherData = async () => {
-    //   try {
-    //     const data = await Axios.get(
-    //       `https://weatherdbi.herokuapp.com/data/weather/${city}`
-    //     );
-    //     // console.log(data);
-    //     setWeather(data.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-
-    weatherData();
-  }, [city]);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setCity("");
-    console.log("button");
-  };
-
   return (
     <div id="search-page">
-      <form onSubmit={submitHandler}>
+      <h2>Welcome to the weather app {Name}</h2>
+      <form onSubmit={fetchWeather}>
         <div className="form-inner">
           <h2>City</h2>
 
@@ -59,9 +38,10 @@ function WeatherApi({ Name }) {
             />
           </div>
 
-          <input type="submit" value="Enter" />
+          <input type="submit" value="Search" />
         </div>
       </form>
+      {/* {carddisplay == true ? <Data WeatherInfo={weather} /> : ""} */}
       <Data WeatherInfo={weather} />
     </div>
   );
