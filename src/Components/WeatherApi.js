@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-
 import Data from "./Data";
 import "./WeatherApi.css";
 
