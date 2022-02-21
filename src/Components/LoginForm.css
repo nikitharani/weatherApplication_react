@@ -1,11 +1,3 @@
-/* input,
-button {
-  appearance: normal;
-  background: none;
-  border: none;
-  outline: none;
-} */
-
 #login-page form {
   height: 100vh;
   display: flex;
@@ -14,26 +6,7 @@ button {
   background-color: beige;
 }
 
-/* form { */
-/* display: block;
-  position: relative; */
-/* } */
-
-/* form:after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  z-index: 1; */
-/* background-image: linear-gradient(to bottom right, brown, black); */
-/* } */
-
 #login-page form .form-inner {
-  /* position: relative;
-  display: block; */
   background-color: rgb(17, 51, 80);
   padding: 30px;
   width: 18vw;
