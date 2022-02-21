@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 
 import Data from "./Data";
+import "./WeatherApi.css";
 
 function WeatherApi({ Name }) {
   const [city, setCity] = useState("");
@@ -23,6 +24,7 @@ function WeatherApi({ Name }) {
       //   setCurrentNoOfCards(0);
       // } else {
       // }
+      console.log(response.data);
       setGlobalWeatherInfo((oldArray) => [...oldArray, response.data]);
       // setGlobalWeatherInfo(this.state.globalWeatherInfo);
 
@@ -33,6 +35,7 @@ function WeatherApi({ Name }) {
         "globalWeatherInfo.length in search:",
         globalWeatherInfo.length
       );
+      setCity("");
     }
     // setCurrentNoOfCards(currentNoOfCards + 1);
   };
@@ -67,15 +70,16 @@ function WeatherApi({ Name }) {
   };
 
   return (
-    <div id="search-page">
+    <div class="search-page">
       <h2>Welcome to the weather app {Name}</h2>
       <form onSubmit={fetchWeather}>
         <div className="form-inner">
-          <h2>City</h2>
+          {/* <h2>City</h2> */}
 
           <div className="form-group">
-            <label htmlFor="name">City</label>
+            <label htmlFor="name">City:</label>
             <input
+              placeholder="City Name"
               type="text"
               name="name"
               id="name"
@@ -88,9 +92,11 @@ function WeatherApi({ Name }) {
         </div>
       </form>
       {/* {carddisplay == true ? <Data WeatherInfo={weather} /> : ""} */}
-      {globalWeatherInfo.length <= 4
-        ? ""
-        : "You have reached maximum searches(5!)"}
+      <p>
+        {globalWeatherInfo.length <= 4
+          ? ""
+          : "You have reached maximum searches(5!)"}
+      </p>
       <Data WeatherInfo={globalWeatherInfo} DeleteCard={deleteHandler} />
     </div>
   );

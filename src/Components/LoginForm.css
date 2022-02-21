@@ -80,8 +80,9 @@ button {
 #login-page form .form-inner input[type="submit"] {
   display: inline-block;
   padding: 10px 15px;
+  width: 30%;
   border-radius: 8px;
-  background-color: blanchedalmond;
+  background-color: #db7b43;
   font-weight: 700;
 }
 
